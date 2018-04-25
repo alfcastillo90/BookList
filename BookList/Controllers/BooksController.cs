@@ -35,6 +35,19 @@ namespace BookList.Controllers
             }
             return View(book);
         }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var book = await _db.Books.SingleOrDefaultAsync(m => m.Id == id);
+            if(book == null)
+            {
+                return NotFound();
+            }
+            return View(book);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
